@@ -4,6 +4,7 @@ import com.szepe.peter.pex.api.ImageReader;
 import com.szepe.peter.pex.api.Try;
 import com.szepe.peter.pex.impl.FileReader;
 import com.szepe.peter.pex.spi.InputReader;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.ExecutionException;
@@ -15,6 +16,7 @@ import java.util.stream.Stream;
 /**
  * Use -XX:ActiveProcessorCount=1 to set CPU count to 1
  */
+@Ignore
 public class DownloadPerformaceTest {
 
     private final static Logger logger = Logger.getLogger(Main.class.getName());
