@@ -7,7 +7,7 @@ import java.util.function.Supplier;
 
 public class StopWatch {
 
-    Map<String, Long> taskToTime = new LinkedHashMap<>();
+    private final Map<String, Long> taskToTime = new LinkedHashMap<>();
 
     public <T, R> R start(String task, Supplier<R> function) {
         long startTime = System.nanoTime();

@@ -1,6 +1,7 @@
 package com.szepe.peter.pex;
 
 import com.google.common.collect.Comparators;
+import com.szepe.peter.pex.api.ComparablePairByValue;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -41,31 +42,31 @@ public class ImageProcessorEngine {
         }
     }
 
-    public List<Pair<Color, Integer>> process() throws IOException {
+    public List<ComparablePairByValue<Color, Integer>> process() throws IOException {
         Optional<BufferedImage> image = clock.start("Download image", () -> readImage());
         if (image.isPresent()) {
             int[][][] colors = clock.start("Count colors", () -> processImage(image.get()));
-            List<Pair<Color, Integer>> pairs = clock.start("Select top K", () -> getTopK(colors));
+            List<ComparablePairByValue<Color, Integer>> pairs = clock.start("Select top K", () -> getTopK(colors));
             return pairs;
         } else {
             return Collections.emptyList();
         }
     }
 
-    private List<Pair<Color, Integer>> getTopK(int[][][] colors) {
-        List<Pair<Color, Integer>> list = new ArrayList<>();
+    private List<ComparablePairByValue<Color, Integer>> getTopK(int[][][] colors) {
+        List<ComparablePairByValue<Color, Integer>> list = new ArrayList<>();
         for (int r = 0; r < 256; ++r) {
             for (int g = 0; g < 256; ++g) {
                 for (int b = 0; b < 256; ++b) {
                     int count = colors[r][g][b];
                     if (count > 0) {
-                        list.add(new Pair<>(new Color(r, g, b), count));
+                        list.add(new ComparablePairByValue<>(new Color(r, g, b), count));
                     }
                 }
             }
         }
 
-        return list.stream().collect(Comparators.greatest(k, Pair::compareTo));
+        return list.stream().collect(Comparators.greatest(k, ComparablePairByValue::compareTo));
     }
 
     private int[][][] processImage(BufferedImage image) {
@@ -84,27 +85,4 @@ public class ImageProcessorEngine {
     }
 
 
-    public static class Pair<K, V extends Comparable<V>> implements Comparable<Pair<K, V>> {
-
-        private final K k;
-        private final V v;
-
-        public Pair(K k, V v) {
-            this.k = k;
-            this.v = v;
-        }
-
-        @Override
-        public int compareTo(Pair<K, V> o) {
-            return this.v.compareTo(o.v);
-        }
-
-        @Override
-        public String toString() {
-            return "Pair{" +
-                    "k=" + k +
-                    ", v=" + v +
-                    '}';
-        }
-    }
 }

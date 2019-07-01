@@ -7,7 +7,7 @@ public interface InputReader {
 
     Stream<String> get() throws InputReaderException;
 
-    class InputReaderException extends Exception {
+    class InputReaderException extends Throwable {
         public InputReaderException() {
         }
 

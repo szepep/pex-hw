@@ -16,7 +16,7 @@ public class FileReader implements InputReader {
     }
 
     @Override
-    public Stream<String> get() throws InputReaderException{
+    public Stream<String> get() throws InputReaderException {
         try {
             return Files.lines(Paths.get(path));
         } catch (IOException e) {
