@@ -1,60 +1,51 @@
 package com.szepe.peter.pex;
 
-import com.szepe.peter.pex.api.ImageReader;
-import com.szepe.peter.pex.api.Try;
 import com.szepe.peter.pex.impl.FileReader;
+import com.szepe.peter.pex.rx.BufferedImageToTopK;
+import com.szepe.peter.pex.rx.ByteArrayToBufferedImage;
+import com.szepe.peter.pex.rx.DownloadImageAsByteArray;
 import com.szepe.peter.pex.spi.InputReader;
+import rx.Observable;
+import rx.schedulers.Schedulers;
 
-import java.awt.image.BufferedImage;
-import java.util.concurrent.*;
+import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Stream;
 
 public class Main {
 
     private final static Logger logger = Logger.getLogger(Main.class.getName());
 
     public static void main(String[] args) throws InputReader.InputReaderException {
-        new Main().process();
+        int processors = Runtime.getRuntime().availableProcessors();
+        logger.info("Number of processors: " + processors);
+        long maxMemory = Runtime.getRuntime().maxMemory();
+        logger.info("Max memory: " + maxMemory);
+        new Main().rxProcess();
     }
 
-    void process() throws InputReader.InputReaderException {
+    void rxProcess() throws InputReader.InputReaderException {
         String path = "./test_data/input.txt";
-        int top = 3;
-        int readParallelism = 2;
-        int processParallelism = 2;
-        int queueSize = 10;
 
-        InputReader reader = new FileReader(path);
-        Stream<String> lines = reader.get();
-        ImageReader imageReader = new ImageReader();
+        FileReader fileReader = new FileReader(path);
+        long startTime = System.nanoTime();
+        Observable.from(fileReader.get()::iterator)
+                .window(100)
+                .flatMap(urls -> urls
+                        .observeOn(Schedulers.io())
+                        .lift(new DownloadImageAsByteArray())
+                )
+                .window(10)
+                .flatMap(byteArrays -> byteArrays
+                        .observeOn(Schedulers.computation())
+                        .lift(new ByteArrayToBufferedImage())
+                        .lift(new BufferedImageToTopK(3))
+                )
+                .toBlocking()
+                .subscribe(next -> System.out.println(next.getFirst() + ": " + next.getSecond()),
+                        error -> logger.log(Level.WARNING, "unable to download image", error));
 
-        final BlockingQueue<Runnable> queue = new LinkedBlockingQueue<>(queueSize);
-        ThreadPoolExecutor executor = new ThreadPoolExecutor(
-                processParallelism,
-                processParallelism,
-                0,
-                TimeUnit.SECONDS,
-                queue);
-
-        ForkJoinPool readThreadPool = new ForkJoinPool(readParallelism);
-        ForkJoinTask<?> readTasks = readThreadPool.submit(() -> {
-            lines.parallel().forEach(
-                    url -> Try.tryIt(imageReader::read).apply(url)
-                            .consumeResult(image -> execute(executor, url, image, top))
-                            .consumeException(p -> logger.warning("Unable to read image " + p.getValue()))
-            );
-        });
-
-        readTasks.join();
-        executor.shutdown();
-
+        long elapsedTime = System.nanoTime() - startTime;
+        logger.log(Level.INFO, "Computation took " + elapsedTime / 1_000_000);
     }
-
-    private void execute(Executor executor, String url, BufferedImage image, int k) {
-            logger.fine("Scheduling task " + url);
-            executor.execute(ImageProcessingTask.of(url, image, k));
-    }
-
 
 }
