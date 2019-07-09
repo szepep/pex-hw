@@ -1,10 +1,7 @@
 package com.szepe.peter.pex.rx;
 
 import com.google.common.collect.Comparators;
-import com.szepe.peter.pex.api.ComparablePairByValue;
 import com.szepe.peter.pex.api.Pair;
-import rx.Observable;
-import rx.Subscriber;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -15,8 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-public class BufferedImageToTopK implements Observable.Operator<
-        Pair<String, List<Pair<Color, Integer>>>, Pair<String, BufferedImage>> {
+public class BufferedImageToTopK implements OperatorProvider<Pair<String, BufferedImage>, Pair<String, List<Pair<Color, Integer>>>, Exception> {
 
     private final static Logger logger = Logger.getLogger(BufferedImageToTopK.class.getName());
 
@@ -27,33 +23,14 @@ public class BufferedImageToTopK implements Observable.Operator<
     }
 
     @Override
-    public Subscriber<? super Pair<String, BufferedImage>> call(
-            Subscriber<? super Pair<String, List<Pair<Color, Integer>>>> subscriber) {
+    public Operator<Pair<String, BufferedImage>, Pair<String, List<Pair<Color, Integer>>>, Exception> get() {
+        return Operator.of("Calculating top K", this::processImage);
+    }
 
-        return new Subscriber<Pair<String, BufferedImage>>() {
-            @Override
-            public void onCompleted() {
-                if (!subscriber.isUnsubscribed()) {
-                    subscriber.onCompleted();
-                }
-            }
-
-            @Override
-            public void onError(Throwable throwable) {
-                if (!subscriber.isUnsubscribed()) {
-                    subscriber.onError(throwable);
-                }
-            }
-
-            @Override
-            public void onNext(Pair<String, BufferedImage> t) {
-                if (!subscriber.isUnsubscribed()) {
-                    logger.log(Level.FINE, "processing image " + t.getFirst() + " on thread " + Thread.currentThread().getName());
-                    List<Pair<Color, Integer>> result = getTopKColor(t.getSecond());
-                    subscriber.onNext(Pair.of(t.getFirst(), result));
-                }
-            }
-        };
+    Pair<String, List<Pair<Color, Integer>>> processImage(Pair<String, BufferedImage> p) {
+        logger.log(Level.FINE, "Processing image " + p.getFirst() + " on thread " + Thread.currentThread().getName());
+        List<Pair<Color, Integer>> result = getTopKColor(p.getSecond());
+        return Pair.of(p.getFirst(), result);
     }
 
     private List<Pair<Color, Integer>> getTopKColor(BufferedImage t) {
@@ -70,5 +47,41 @@ public class BufferedImageToTopK implements Observable.Operator<
         return colors.entrySet().stream().map(e -> ComparablePairByValue.of(e.getKey(), e.getValue()))
                 .collect(Comparators.greatest(k, ComparablePairByValue::compareTo))
                 .stream().map(p -> Pair.of(new Color(p.getK()), p.getV())).collect(Collectors.toList());
+    }
+
+    private static class ComparablePairByValue<K, V extends Comparable<V>> implements Comparable<ComparablePairByValue<K, V>> {
+
+        public static <K, V extends Comparable<V>> ComparablePairByValue<K, V> of(K k, V v) {
+            return new ComparablePairByValue<>(k, v);
+        }
+
+        private final K k;
+        private final V v;
+
+        public ComparablePairByValue(K k, V v) {
+            this.k = k;
+            this.v = v;
+        }
+
+        public K getK() {
+            return k;
+        }
+
+        public V getV() {
+            return v;
+        }
+
+        @Override
+        public int compareTo(ComparablePairByValue<K, V> o) {
+            return this.v.compareTo(o.v);
+        }
+
+        @Override
+        public String toString() {
+            return "Pair{" +
+                    "k=" + k +
+                    ", v=" + v +
+                    '}';
+        }
     }
 }

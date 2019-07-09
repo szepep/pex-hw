@@ -1,5 +1,6 @@
 package com.szepe.peter.pex.rx;
 
+import com.google.common.io.ByteStreams;
 import com.szepe.peter.pex.api.Pair;
 import rx.Observable;
 import rx.Subscriber;
@@ -12,41 +13,21 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ByteArrayToBufferedImage implements Observable.Operator<Pair<String, BufferedImage>, Pair<String, byte[]>> {
+public class ByteArrayToBufferedImage implements OperatorProvider<Pair<String, byte[]>, Pair<String, BufferedImage>, IOException> {
 
     private final static Logger logger = Logger.getLogger(ByteArrayToBufferedImage.class.getName());
 
     @Override
-    public Subscriber<? super Pair<String, byte[]>> call(Subscriber<? super Pair<String, BufferedImage>> subscriber) {
-        return new Subscriber<Pair<String, byte[]>>() {
-            @Override
-            public void onCompleted() {
-                if (!subscriber.isUnsubscribed()) {
-                    subscriber.onCompleted();
-                }
-            }
+    public Operator<Pair<String, byte[]>, Pair<String, BufferedImage>, IOException> get() {
+        return Operator.of("Calculating BufferedImage from byte array",
+                this::createBufferedImage,
+                e -> logger.log(Level.WARNING, "Unable to read image as BufferedImage " + e.getValue(), e.getException()));
+    }
 
-            @Override
-            public void onError(Throwable throwable) {
-                if (!subscriber.isUnsubscribed()) {
-                    subscriber.onError(throwable);
-                }
-            }
-
-            @Override
-            public void onNext(Pair<String, byte[]> t) {
-                if (!subscriber.isUnsubscribed()) {
-                    URL url = null;
-                    try {
-                        logger.log(Level.FINE, "processing image " + t.getFirst() + " on thread " + Thread.currentThread().getName());
-                        ByteArrayInputStream bais = new ByteArrayInputStream(t.getSecond());
-                        BufferedImage image = ImageIO.read(bais);
-                        subscriber.onNext(Pair.of(t.getFirst(), image));
-                    } catch (IOException e) {
-                        logger.log(Level.WARNING, "Unable to read image as BufferedImage " + t.getFirst());
-                    }
-                }
-            }
-        };
+    Pair<String, BufferedImage> createBufferedImage(Pair<String, byte[]> p) throws IOException {
+        logger.log(Level.FINE, "Creating BufferedImage from " + p.getFirst() + " on thread " + Thread.currentThread().getName());
+        ByteArrayInputStream bais = new ByteArrayInputStream(p.getSecond());
+        BufferedImage image = ImageIO.read(bais);
+        return Pair.of(p.getFirst(), image);
     }
 }

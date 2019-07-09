@@ -1,13 +1,21 @@
 package com.szepe.peter.pex;
 
+import com.szepe.peter.pex.api.Pair;
 import com.szepe.peter.pex.impl.FileReader;
 import com.szepe.peter.pex.rx.BufferedImageToTopK;
 import com.szepe.peter.pex.rx.ByteArrayToBufferedImage;
 import com.szepe.peter.pex.rx.DownloadImageAsByteArray;
+import com.szepe.peter.pex.rx.Operator;
 import com.szepe.peter.pex.spi.InputReader;
 import rx.Observable;
+import rx.Scheduler;
 import rx.schedulers.Schedulers;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,25 +35,33 @@ public class Main {
         String path = "./test_data/input.txt";
 
         FileReader fileReader = new FileReader(path);
-        long startTime = System.nanoTime();
+        int downloadThreads = 10;
+        int processThreads = 2;
+        Scheduler downloadScheduler = Schedulers.from(Executors.newFixedThreadPool(downloadThreads));
+        Scheduler processScheduler = Schedulers.from(Executors.newFixedThreadPool(processThreads));
+
+        Operator<String, Pair<String, byte[]>, IOException> downloadImageOperator = new DownloadImageAsByteArray().get();
+        Operator<Pair<String, byte[]>, Pair<String, BufferedImage>, IOException> readToBufferedImageOperator = new ByteArrayToBufferedImage().get();
+        Operator<Pair<String, BufferedImage>, Pair<String, List<Pair<Color, Integer>>>, Exception> topKColorOperator = new BufferedImageToTopK(3).get();
+
+
         Observable.from(fileReader.get()::iterator)
-                .window(100)
-                .flatMap(urls -> urls
-                        .observeOn(Schedulers.io())
-                        .lift(new DownloadImageAsByteArray())
-                )
-                .window(10)
-                .flatMap(byteArrays -> byteArrays
-                        .observeOn(Schedulers.computation())
-                        .lift(new ByteArrayToBufferedImage())
-                        .lift(new BufferedImageToTopK(3))
+                .flatMap(url -> Observable.just(url)
+                                .observeOn(downloadScheduler)
+                                .lift(downloadImageOperator),
+                        downloadThreads)
+                .flatMap(byteArray -> Observable.just(byteArray)
+                                .observeOn(processScheduler)
+                                .lift(readToBufferedImageOperator)
+                                .lift(topKColorOperator),
+                        processThreads
                 )
                 .toBlocking()
-                .subscribe(next -> System.out.println(next.getFirst() + ": " + next.getSecond()),
-                        error -> logger.log(Level.WARNING, "unable to download image", error));
+                .subscribe(next -> System.out.println(next.getFirst() + ": " + next.getSecond()));
 
-        long elapsedTime = System.nanoTime() - startTime;
-        logger.log(Level.INFO, "Computation took " + elapsedTime / 1_000_000);
+        logger.log(Level.INFO, downloadImageOperator.printStats());
+        logger.log(Level.INFO, readToBufferedImageOperator.printStats());
+        logger.log(Level.INFO, topKColorOperator.printStats());
     }
 
 }
