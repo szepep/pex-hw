@@ -2,22 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e2d1fb73-61e5-46be-a27c-a78d5e17f59a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/rx/Operator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/rx/OperatorProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/rx/BufferedImageToTopKArray.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/rx/ComparablePairByValue.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/szepe/peter/pex/rx/BufferedImageToTopKArrayTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/szepe/peter/pex/rx/Utils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/ImageProcessingTask.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/ImageProcessorEngine.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/StopWatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/utils/Watch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/api/ComparablePairByValue.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/api/ExceptionConsumer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/api/ImageReader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/api/ResultConsumer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/api/Try.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/api/Try.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/api/Pair.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/api/Pair.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/rx/BufferedImageToTopK.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/rx/BufferedImageToTopK.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/rx/ByteArrayToBufferedImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/rx/ByteArrayToBufferedImage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/rx/DownloadImageAsByteArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/rx/DownloadImageAsByteArray.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/szepe/peter/pex/DownloadPerformaceTest.java" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -35,8 +27,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="59" column="96" selection-start-line="59" selection-start-column="96" selection-end-line="59" selection-end-column="96" />
+            <state relative-caret-position="215">
+              <caret line="39" column="148" lean-forward="true" selection-start-line="39" selection-start-column="148" selection-end-line="39" selection-end-column="148" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -44,21 +36,66 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/rx/BufferedImageToTopK.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="169">
-              <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+            <state relative-caret-position="221">
+              <caret line="40" column="37" lean-forward="true" selection-start-line="40" selection-start-column="37" selection-end-line="40" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#752#753#0" expanded="true" />
-                <element signature="e#778#779#0" expanded="true" />
-                <element signature="e#2453#2454#0" expanded="true" />
-                <element signature="e#2485#2486#0" expanded="true" />
-                <element signature="e#2516#2517#0" expanded="true" />
-                <element signature="e#2548#2549#0" expanded="true" />
-                <element signature="e#2633#2634#0" expanded="true" />
-                <element signature="e#2685#2686#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/awt/image/BufferedImage.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-427">
+              <caret line="1014" column="29" selection-start-line="1014" selection-start-column="29" selection-end-line="1014" selection-end-column="29" />
+              <folding>
+                <element signature="e#37710#37711#0" expanded="true" />
+                <element signature="e#37786#37787#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/io/reactivex/rxjava/1.3.8/rxjava-1.3.8.jar!/rx/internal/util/RxThreadFactory.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="24" selection-start-line="24" selection-end-line="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/rx/BufferedImageToTopKArray.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="151">
+              <caret line="67" selection-start-line="67" selection-end-line="67" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/szepe/peter/pex/rx/BufferedImageToTopKArrayTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="96">
+              <caret line="12" column="49" selection-start-line="12" selection-start-column="49" selection-end-line="12" selection-end-column="49" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-api/5.3.1/junit-jupiter-api-5.3.1.jar!/org/junit/jupiter/api/Assertions.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="141">
+              <caret line="128" column="23" selection-start-line="128" selection-start-column="23" selection-end-line="128" selection-end-column="23" />
+              <folding>
+                <element signature="e#3847#3848#0" expanded="true" />
+                <element signature="e#3906#3907#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -67,72 +104,32 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/api/Pair.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="25" column="18" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/rx/OperatorProvider.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/rx/ByteArrayToBufferedImage.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="163">
-              <caret line="21" column="70" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="70" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/rx/DownloadImageAsByteArray.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="22" column="48" selection-start-line="22" selection-start-column="48" selection-end-line="22" selection-end-column="48" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/rx/Operator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="384">
-              <caret line="62" column="41" lean-forward="true" selection-start-line="62" selection-start-column="41" selection-end-line="62" selection-end-column="41" />
+            <state relative-caret-position="368">
+              <caret line="45" column="20" lean-forward="true" selection-start-line="45" selection-start-column="20" selection-end-line="45" selection-end-column="20" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2150#2151#0" expanded="true" />
-                <element signature="e#2210#2211#0" expanded="true" />
+                <element signature="e#407#408#0" expanded="true" />
+                <element signature="e#436#437#0" expanded="true" />
+                <element signature="e#815#816#0" expanded="true" />
+                <element signature="e#865#866#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/utils/Watch.java">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/szepe/peter/pex/rx/Utils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="26" column="16" lean-forward="true" selection-start-line="26" selection-start-column="16" selection-end-line="26" selection-end-column="16" />
+            <state relative-caret-position="134">
+              <caret line="46" column="16" lean-forward="true" selection-start-line="46" selection-start-column="16" selection-end-line="46" selection-end-column="16" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/api/Try.java">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/util/Map.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="38" column="5" lean-forward="true" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#743#744#0" expanded="true" />
-                <element signature="e#784#785#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="141">
+              <caret line="585" column="14" selection-start-line="585" selection-start-column="14" selection-end-line="585" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -143,6 +140,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="JUnit5 Test Class" />
         <option value="Class" />
       </list>
     </option>
@@ -186,18 +184,23 @@
         <option value="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/ByteArrayToBufferedImage.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/BufferedImageToTopK.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/api/ComparablePairByValue.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/api/Pair.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/ImageProcessorEngine.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/utils/StopWatch.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/utils/Watch.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/rx/OperatorProvider.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/rx/Operator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/rx/BufferedImageToTopK.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/rx/ByteArrayToBufferedImage.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/rx/DownloadImageAsByteArray.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/api/ExceptionConsumer.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/api/Try.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/rx/Operator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/rx/ComparablePairByValue.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/rx/BufferedImageToTopKMap.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/rx/BufferedImageToTopK.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/rx/BufferedImageToTopKArray.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/api/Pair.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/szepe/peter/pex/rx/Utils.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/szepe/peter/pex/rx/BufferedImageToTopKArrayTest.java" />
       </list>
     </option>
   </component>
@@ -240,6 +243,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -337,7 +342,7 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="pex" type="462c0819:PsiDirectoryNode" />
+              <item name="rx" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pex" type="b2602c69:ProjectViewProjectNode" />
@@ -352,23 +357,34 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_directory_selection" value="$PROJECT_DIR$/src/test/java" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/src/test/java/com/szepe/peter/pex/rx" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../slim-master/slim-master/slim" />
     <property name="settings.editor.selected.configurable" value="experimental" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="com.szepe.peter.pex.utils" />
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.szepe.peter.pex.rx" />
     </key>
     <key name="MoveInnerDialog.RECENTS_KEY">
+      <recent name="com.szepe.peter.pex.rx" />
       <recent name="com.szepe.peter.pex" />
       <recent name="com.szepe.peter.pex.api" />
+    </key>
+    <key name="MoveMembersDialog.RECENTS_KEY">
+      <recent name="com.szepe.peter.pex.rx.Utils" />
+      <recent name="Utils" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.szepe.peter.pex.utils" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.szepe.peter.pex.rx" />
@@ -388,7 +404,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="JUnit.BufferedImageToTopKArrayTest.testTopK">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.szepe.peter.pex.Main" />
       <module name="pex" />
@@ -399,6 +415,37 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BufferedImageToTopKArrayTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="pex" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.szepe.peter.pex.rx.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.szepe.peter.pex.rx" />
+      <option name="MAIN_CLASS_NAME" value="com.szepe.peter.pex.rx.BufferedImageToTopKArrayTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BufferedImageToTopKArrayTest.testTopK" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="pex" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.szepe.peter.pex.rx.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.szepe.peter.pex.rx" />
+      <option name="MAIN_CLASS_NAME" value="com.szepe.peter.pex.rx.BufferedImageToTopKArrayTest" />
+      <option name="METHOD_NAME" value="testTopK" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -441,9 +488,13 @@
       <item itemvalue="Application.Main" />
       <item itemvalue="JUnit.DownloadPerformaceTest.performanceTest" />
       <item itemvalue="JUnit.TestImager.test" />
+      <item itemvalue="JUnit.BufferedImageToTopKArrayTest.testTopK" />
+      <item itemvalue="JUnit.BufferedImageToTopKArrayTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.BufferedImageToTopKArrayTest.testTopK" />
+        <item itemvalue="JUnit.BufferedImageToTopKArrayTest" />
         <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.TestImager.test" />
         <item itemvalue="JUnit.DownloadPerformaceTest.performanceTest" />
@@ -531,40 +582,60 @@
       <option name="project" value="LOCAL" />
       <updated>1562337085222</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Cleaning rx java code">
+      <created>1562708737261</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1562708737261</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Cleaning rx java code">
+      <created>1562708829023</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1562708829023</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="DownloadPerformaceTest_performanceTest - 2019.07.01 at 22h 55m 50s.xml">
-      <configuration name="DownloadPerformaceTest.performanceTest" configurationId="JUnit" />
+    <history-entry file="BufferedImageToTopKArrayTest_testTopK - 2019.07.11 at 20h 06m 08s.xml">
+      <configuration name="BufferedImageToTopKArrayTest.testTopK" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DownloadPerformaceTest_performanceTest - 2019.07.01 at 22h 57m 31s.xml">
-      <configuration name="DownloadPerformaceTest.performanceTest" configurationId="JUnit" />
+    <history-entry file="BufferedImageToTopKArrayTest - 2019.07.11 at 20h 08m 38s.xml">
+      <configuration name="BufferedImageToTopKArrayTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DownloadPerformaceTest_performanceTest - 2019.07.01 at 23h 02m 34s.xml">
-      <configuration name="DownloadPerformaceTest.performanceTest" configurationId="JUnit" />
+    <history-entry file="BufferedImageToTopKArrayTest - 2019.07.11 at 20h 12m 30s.xml">
+      <configuration name="BufferedImageToTopKArrayTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DownloadPerformaceTest_performanceTest - 2019.07.01 at 23h 04m 07s.xml">
-      <configuration name="DownloadPerformaceTest.performanceTest" configurationId="JUnit" />
+    <history-entry file="BufferedImageToTopKArrayTest - 2019.07.11 at 20h 21m 11s.xml">
+      <configuration name="BufferedImageToTopKArrayTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DownloadPerformaceTest_performanceTest - 2019.07.01 at 23h 05m 12s.xml">
-      <configuration name="DownloadPerformaceTest.performanceTest" configurationId="JUnit" />
+    <history-entry file="BufferedImageToTopKArrayTest_testTopK - 2019.07.11 at 20h 44m 47s.xml">
+      <configuration name="BufferedImageToTopKArrayTest.testTopK" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DownloadPerformaceTest_performanceTest - 2019.07.01 at 23h 10m 11s.xml">
-      <configuration name="DownloadPerformaceTest.performanceTest" configurationId="JUnit" />
+    <history-entry file="BufferedImageToTopKArrayTest_testTopK - 2019.07.11 at 20h 45m 29s.xml">
+      <configuration name="BufferedImageToTopKArrayTest.testTopK" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DownloadPerformaceTest_performanceTest - 2019.07.01 at 23h 12m 00s.xml">
-      <configuration name="DownloadPerformaceTest.performanceTest" configurationId="JUnit" />
+    <history-entry file="BufferedImageToTopKArrayTest - 2019.07.11 at 20h 46m 51s.xml">
+      <configuration name="BufferedImageToTopKArrayTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DownloadPerformaceTest_performanceTest - 2019.07.01 at 23h 33m 18s.xml">
-      <configuration name="DownloadPerformaceTest.performanceTest" configurationId="JUnit" />
+    <history-entry file="BufferedImageToTopKArrayTest - 2019.07.11 at 20h 48m 20s.xml">
+      <configuration name="BufferedImageToTopKArrayTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="BufferedImageToTopKArrayTest_testTopK - 2019.07.11 at 20h 49m 09s.xml">
+      <configuration name="BufferedImageToTopKArrayTest.testTopK" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="BufferedImageToTopKArrayTest_testTopK - 2019.07.11 at 20h 49m 39s.xml">
+      <configuration name="BufferedImageToTopKArrayTest.testTopK" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="886" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21722364" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21979435" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -573,15 +644,15 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32903227" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4993573" visible="true" weight="0.32802126" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39870968" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4974293" visible="true" weight="0.32802126" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49807197" weight="0.3984064" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50064266" side_tool="true" visible="true" weight="0.32802126" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5025707" side_tool="true" visible="true" weight="0.32802126" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.32903227" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -602,7 +673,8 @@
     <MESSAGE value="Download performance test&#10;&#10;1 thread time: 433214671600&#10;2 thread time: 283754471800&#10;4 thread time: 265367945200&#10;6 thread time: 278094974900" />
     <MESSAGE value="Add some parallel processing" />
     <MESSAGE value="Rx Java POC" />
-    <option name="LAST_COMMIT_MESSAGE" value="Rx Java POC" />
+    <MESSAGE value="Cleaning rx java code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cleaning rx java code" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -626,10 +698,34 @@
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>jar://$MAVEN_REPOSITORY$/io/reactivex/rxjava/1.3.8/rxjava-1.3.8.jar!/rx/internal/util/RxThreadFactory.class</url>
-          <line>24</line>
+          <url>file://$PROJECT_DIR$/src/test/java/com/szepe/peter/pex/rx/Utils.java</url>
+          <line>12</line>
           <properties />
-          <option name="timeStamp" value="16" />
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/szepe/peter/pex/rx/Utils.java</url>
+          <line>31</line>
+          <properties />
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/szepe/peter/pex/rx/Utils.java</url>
+          <line>35</line>
+          <properties />
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/szepe/peter/pex/rx/Utils.java</url>
+          <line>46</line>
+          <properties />
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/szepe/peter/pex/rx/BufferedImageToTopKArrayTest.java</url>
+          <line>33</line>
+          <properties />
+          <option name="timeStamp" value="24" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -684,59 +780,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/lang/Exception.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="44" column="13" selection-start-line="44" selection-start-column="13" selection-end-line="44" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/util/Optional.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="930">
-          <caret line="285" column="39" selection-start-line="285" selection-start-column="39" selection-end-line="285" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/util/concurrent/ForkJoinPool.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="2503" column="39" selection-start-line="2503" selection-start-column="28" selection-end-line="2503" selection-end-column="39" />
-          <folding>
-            <element signature="e#114596#114597#0" expanded="true" />
-            <element signature="e#114678#114679#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/util/concurrent/Executor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1802">
-          <caret line="139" column="9" selection-start-line="139" selection-start-column="9" selection-end-line="139" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/util/concurrent/Executors.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="799">
-          <caret line="88" column="30" selection-start-line="88" selection-start-column="30" selection-end-line="88" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/util/concurrent/ThreadPoolExecutor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4794">
-          <caret line="322" column="50" selection-start-line="322" selection-start-column="50" selection-end-line="322" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/util/concurrent/AbstractExecutorService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="70" column="22" selection-start-line="70" selection-start-column="22" selection-end-line="70" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/javax/imageio/ImageReadParam.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1785">
@@ -844,17 +887,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/spi/InputReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="87">
-          <caret line="7" column="19" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
-          <folding>
-            <element signature="e#439#440#0" expanded="true" />
-            <element signature="e#484#485#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/io/reactivex/rxjava/1.3.8/rxjava-1.3.8.jar!/rx/functions/Func1.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -884,17 +916,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/io/reactivex/rxjava/1.3.8/rxjava-1.3.8.jar!/rx/internal/util/RxThreadFactory.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="24" column="59" selection-start-line="24" selection-start-column="59" selection-end-line="24" selection-end-column="59" />
-          <folding>
-            <element signature="e#636#637#0" expanded="true" />
-            <element signature="e#672#673#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/lang/Object.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="708">
@@ -909,81 +930,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/awt/image/BufferedImage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="915" column="15" selection-start-line="915" selection-start-column="15" selection-end-line="915" selection-end-column="15" />
-          <folding>
-            <element signature="e#37710#37711#0" expanded="true" />
-            <element signature="e#37786#37787#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/util/Map.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="741" column="10" selection-start-line="741" selection-start-column="10" selection-end-line="741" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/api/ComparablePairByValue.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="23" selection-start-line="23" selection-end-line="23" />
-          <folding>
-            <element signature="e#457#458#0" expanded="true" />
-            <element signature="e#481#482#0" expanded="true" />
-            <element signature="e#504#505#0" expanded="true" />
-            <element signature="e#528#529#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/ImageProcessingTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="969">
-          <caret line="63" column="83" selection-start-line="63" selection-start-column="16" selection-end-line="63" selection-end-column="83" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#879#880#0" expanded="true" />
-            <element signature="e#910#911#0" expanded="true" />
-            <element signature="e#949#950#0" expanded="true" />
-            <element signature="e#977#978#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/ImageProcessorEngine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="54" column="5" selection-start-line="54" selection-start-column="5" selection-end-line="54" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/utils/StopWatch.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="21" column="5" lean-forward="true" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/szepe/peter/pex/DownloadPerformaceTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="50" column="35" selection-start-line="50" selection-start-column="35" selection-end-line="50" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/api/ComparablePairByValue.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/ImageProcessingTask.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/ImageProcessorEngine.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/utils/StopWatch.java" />
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/szepe/peter/pex/DownloadPerformaceTest.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/util/function/Function.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="164">
@@ -998,17 +949,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/rx/OperatorProvider.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/utils/Watch.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        <state relative-caret-position="340">
+          <caret line="26" column="16" selection-start-line="26" selection-start-column="16" selection-end-line="26" selection-end-column="16" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/api/ImageReader.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/api/ExceptionConsumer.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/api/ResultConsumer.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/rx/Operator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="62" column="41" lean-forward="true" selection-start-line="62" selection-start-column="41" selection-end-line="62" selection-end-column="41" />
+        <state relative-caret-position="237">
+          <caret line="23" column="145" selection-start-line="23" selection-start-column="145" selection-end-line="23" selection-end-column="145" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2150#2151#0" expanded="true" />
@@ -1017,16 +971,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/utils/Watch.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/rx/OperatorProvider.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="26" column="16" lean-forward="true" selection-start-line="26" selection-start-column="16" selection-end-line="26" selection-end-column="16" />
+        <state relative-caret-position="68">
+          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/22.0/guava-22.0.jar!/com/google/common/collect/Comparators.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="952">
+          <caret line="67" column="47" selection-start-line="67" selection-start-column="47" selection-end-line="67" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/util/ArrayList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2108">
+          <caret line="150" column="34" selection-start-line="150" selection-start-column="34" selection-end-line="150" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/rx/ComparablePairByValue.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/spi/InputReader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+          <folding>
+            <element signature="e#439#440#0" expanded="true" />
+            <element signature="e#484#485#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/rx/ByteArrayToBufferedImage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
+        <state relative-caret-position="170">
           <caret line="21" column="70" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="70" />
         </state>
       </provider>
@@ -1038,74 +1024,103 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/api/ImageReader.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/api/Try.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="26" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
+        <state relative-caret-position="170">
+          <caret line="11" column="25" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/io/reactivex/rxjava/1.3.8/rxjava-1.3.8.jar!/rx/internal/util/RxThreadFactory.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/awt/image/BufferedImage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-427">
+          <caret line="1014" column="29" selection-start-line="1014" selection-start-column="29" selection-end-line="1014" selection-end-column="29" />
+          <folding>
+            <element signature="e#37710#37711#0" expanded="true" />
+            <element signature="e#37786#37787#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="59" column="96" selection-start-line="59" selection-start-column="96" selection-end-line="59" selection-end-column="96" />
+        <state relative-caret-position="215">
+          <caret line="39" column="148" lean-forward="true" selection-start-line="39" selection-start-column="148" selection-end-line="39" selection-end-column="148" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/api/ExceptionConsumer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" selection-start-line="4" selection-end-line="6" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/api/ResultConsumer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" selection-start-line="4" selection-end-line="6" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/api/Pair.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="25" column="18" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/api/Try.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="38" column="5" lean-forward="true" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#743#744#0" expanded="true" />
-            <element signature="e#784#785#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/rx/BufferedImageToTopK.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+        <state relative-caret-position="221">
+          <caret line="40" column="37" lean-forward="true" selection-start-line="40" selection-start-column="37" selection-end-line="40" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#752#753#0" expanded="true" />
-            <element signature="e#778#779#0" expanded="true" />
-            <element signature="e#2453#2454#0" expanded="true" />
-            <element signature="e#2485#2486#0" expanded="true" />
-            <element signature="e#2516#2517#0" expanded="true" />
-            <element signature="e#2548#2549#0" expanded="true" />
-            <element signature="e#2633#2634#0" expanded="true" />
-            <element signature="e#2685#2686#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/api/Pair.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="45" column="20" lean-forward="true" selection-start-line="45" selection-start-column="20" selection-end-line="45" selection-end-column="20" />
+          <folding>
+            <element signature="e#407#408#0" expanded="true" />
+            <element signature="e#436#437#0" expanded="true" />
+            <element signature="e#815#816#0" expanded="true" />
+            <element signature="e#865#866#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-api/5.3.1/junit-jupiter-api-5.3.1.jar!/org/junit/jupiter/api/Assertions.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="128" column="23" selection-start-line="128" selection-start-column="23" selection-end-line="128" selection-end-column="23" />
+          <folding>
+            <element signature="e#3847#3848#0" expanded="true" />
+            <element signature="e#3906#3907#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/util/Map.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="585" column="14" selection-start-line="585" selection-start-column="14" selection-end-line="585" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/szepe/peter/pex/rx/Utils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="46" column="16" lean-forward="true" selection-start-line="46" selection-start-column="16" selection-end-line="46" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/szepe/peter/pex/rx/BufferedImageToTopKArray.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="67" selection-start-line="67" selection-end-line="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/szepe/peter/pex/rx/BufferedImageToTopKArrayTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="12" column="49" selection-start-line="12" selection-start-column="49" selection-end-line="12" selection-end-column="49" />
         </state>
       </provider>
     </entry>

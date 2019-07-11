@@ -2,10 +2,7 @@ package com.szepe.peter.pex;
 
 import com.szepe.peter.pex.api.Pair;
 import com.szepe.peter.pex.impl.FileReader;
-import com.szepe.peter.pex.rx.BufferedImageToTopK;
-import com.szepe.peter.pex.rx.ByteArrayToBufferedImage;
-import com.szepe.peter.pex.rx.DownloadImageAsByteArray;
-import com.szepe.peter.pex.rx.Operator;
+import com.szepe.peter.pex.rx.*;
 import com.szepe.peter.pex.spi.InputReader;
 import rx.Observable;
 import rx.Scheduler;
@@ -32,26 +29,23 @@ public class Main {
     }
 
     void rxProcess() throws InputReader.InputReaderException {
-        String path = "./test_data/input.txt";
+        String path = "./test_data/short.txt";
 
         FileReader fileReader = new FileReader(path);
         int downloadThreads = 10;
         int processThreads = 2;
-        Scheduler downloadScheduler = Schedulers.from(Executors.newFixedThreadPool(downloadThreads));
-        Scheduler processScheduler = Schedulers.from(Executors.newFixedThreadPool(processThreads));
 
         Operator<String, Pair<String, byte[]>, IOException> downloadImageOperator = new DownloadImageAsByteArray().get();
         Operator<Pair<String, byte[]>, Pair<String, BufferedImage>, IOException> readToBufferedImageOperator = new ByteArrayToBufferedImage().get();
-        Operator<Pair<String, BufferedImage>, Pair<String, List<Pair<Color, Integer>>>, Exception> topKColorOperator = new BufferedImageToTopK(3).get();
-
+        Operator<Pair<String, BufferedImage>, Pair<String, List<Pair<Color, Integer>>>, Exception> topKColorOperator = new BufferedImageToTopKArray(3).get();
 
         Observable.from(fileReader.get()::iterator)
                 .flatMap(url -> Observable.just(url)
-                                .observeOn(downloadScheduler)
+                                .observeOn(Schedulers.io())
                                 .lift(downloadImageOperator),
                         downloadThreads)
                 .flatMap(byteArray -> Observable.just(byteArray)
-                                .observeOn(processScheduler)
+                                .observeOn(Schedulers.computation())
                                 .lift(readToBufferedImageOperator)
                                 .lift(topKColorOperator),
                         processThreads
