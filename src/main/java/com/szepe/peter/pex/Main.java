@@ -11,7 +11,6 @@ import rx.Observable;
 import rx.Scheduler;
 import rx.schedulers.Schedulers;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.List;
@@ -37,7 +36,7 @@ public class Main {
 
         FileReader fileReader = new FileReader(path);
         int downloadThreads = 10;
-        int computationThreads = 2;
+        int computationThreads = 1;
 
         ExecutorService downloadExecutor = Executors.newFixedThreadPool(downloadThreads);
         Scheduler downloadScheduler = Schedulers.from(downloadExecutor);
@@ -46,7 +45,7 @@ public class Main {
 
         Operator<String, Pair<String, byte[]>, IOException> downloadImageOperator = new DownloadImageAsByteArray().get();
         Operator<Pair<String, byte[]>, Pair<String, BufferedImage>, IOException> readToBufferedImageOperator = new ByteArrayToBufferedImage().get();
-        Operator<Pair<String, BufferedImage>, Pair<String, List<Pair<Color, Integer>>>, Exception> topKColorOperator = new BufferedImageToTopKArray(3, computationThreads).get();
+        Operator<Pair<String, BufferedImage>, Pair<String, List<Pair<Integer, Integer>>>, Exception> topKColorOperator = new BufferedImageToTopKArray(3, computationThreads).get();
 
         Observable.from(fileReader.get()::iterator)
                 .flatMap(url -> Observable.just(url)

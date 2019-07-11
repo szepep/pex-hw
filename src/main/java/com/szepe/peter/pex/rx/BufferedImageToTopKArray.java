@@ -16,13 +16,13 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public class BufferedImageToTopKArray implements OperatorProvider<Pair<String, BufferedImage>, Pair<String, List<Pair<Color, Integer>>>, Exception> {
+public class BufferedImageToTopKArray implements OperatorProvider<Pair<String, BufferedImage>, Pair<String, List<Pair<Integer, Integer>>>, Exception> {
 
     private final static Logger logger = Logger.getLogger(BufferedImageToTopKArray.class.getName());
 
     private final int k;
 
-    private final int [][][][] colorsArrays;
+    private final int[][][][] colorsArrays;
     private final Map<Thread, Integer> threadToIdx = new ConcurrentHashMap<>();
     private final AtomicInteger idxCounter = new AtomicInteger();
 
@@ -38,41 +38,40 @@ public class BufferedImageToTopKArray implements OperatorProvider<Pair<String, B
 
 
     @Override
-    public Operator<Pair<String, BufferedImage>, Pair<String, List<Pair<Color, Integer>>>, Exception> get() {
+    public Operator<Pair<String, BufferedImage>, Pair<String, List<Pair<Integer, Integer>>>, Exception> get() {
         return Operator.of("Calculating top K", this::processImage);
     }
 
-    private Pair<String, List<Pair<Color, Integer>>> processImage(Pair<String, BufferedImage> p) {
+    private Pair<String, List<Pair<Integer, Integer>>> processImage(Pair<String, BufferedImage> p) {
         logger.log(Level.FINE, "Processing image " + p.getFirst() + " on thread " + Thread.currentThread().getName());
-        List<Pair<Color, Integer>> result = getTopKColor(p.getSecond());
+        List<Pair<Integer, Integer>> result = getTopKColor(p.getSecond());
         return Pair.of(p.getFirst(), result);
     }
 
-    List<Pair<Color, Integer>> getTopKColor(BufferedImage t) {
+    List<Pair<Integer, Integer>> getTopKColor(BufferedImage t) {
         int[][][] colors = processImage(t);
-        List<ComparablePairByValue<Color, Integer>> topK = getTopK(colors);
+        List<ComparablePairByValue<Integer, Integer>> topK = getTopK(colors);
         return topK.stream().map(p -> Pair.of(p.getK(), p.getV())).collect(Collectors.toList());
     }
 
-    private List<ComparablePairByValue<Color, Integer>> getTopK(int[][][] colors) {
-        Stream<ComparablePairByValue<Color, Integer>> stream = getStream(colors);
-        return stream.collect(Comparators.greatest(k, ComparablePairByValue::compareTo));
+    private List<ComparablePairByValue<Integer, Integer>> getTopK(int[][][] colors) {
+        return getStream(colors).collect(Comparators.greatest(k, ComparablePairByValue::compareTo));
     }
 
-    private Stream<ComparablePairByValue<Color, Integer>> getStream(int[][][] colors) {
+    private Stream<ComparablePairByValue<Integer, Integer>> getStream(int[][][] colors) {
         return IntStream.range(0, 256 * 256 * 256)
                 .mapToObj(i -> getColorIntegerComparablePairByValue(colors, i))
                 .flatMap(o -> o.map(Stream::of).orElse(Stream.empty()));
     }
 
-    private Optional<ComparablePairByValue<Color, Integer>> getColorIntegerComparablePairByValue(int[][][] colors, int i) {
+    private Optional<ComparablePairByValue<Integer, Integer>> getColorIntegerComparablePairByValue(int[][][] colors, int i) {
         int r = (i / (256 * 256)) % 256;
         int g = (i / 256) % 256;
         int b = i % 256;
         int count = colors[r][g][b];
         colors[r][g][b] = 0;
         return count > 0
-                ? Optional.of(ComparablePairByValue.of(new Color(r, g, b), count))
+                ? Optional.of(ComparablePairByValue.of(color(r, g, b), count))
                 : Optional.empty();
     }
 
@@ -89,6 +88,13 @@ public class BufferedImageToTopKArray implements OperatorProvider<Pair<String, B
             }
         }
         return colors;
+    }
+
+    private int color(int r, int g, int b) {
+        return ((255 & 0xFF) << 24) |
+                ((r & 0xFF) << 16) |
+                ((g & 0xFF) << 8) |
+                ((b & 0xFF) << 0);
     }
 
 

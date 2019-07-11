@@ -38,10 +38,10 @@ class BufferedImageToTopKArrayTest {
         BufferedImage img = imgAndColorCounts.getFirst();
         Map<Integer, Set<Color>> colorMap = imgAndColorCounts.getSecond();
 
-        List<Pair<Color, Integer>> topKColor = new BufferedImageToTopKArray(k, 1).getTopKColor(img);
+        List<Pair<Integer, Integer>> topKColor = new BufferedImageToTopKArray(k, 1).getTopKColor(img);
         int prevCount = Integer.MAX_VALUE;
-        for (Pair<Color, Integer> p : topKColor) {
-            Color color = p.getFirst();
+        for (Pair<Integer, Integer> p : topKColor) {
+            Color color = new Color(p.getFirst());
             Integer count = p.getSecond();
             assertTrue(prevCount >= count, "The result is not ordered, failed with seed " + seed);
             assertTrue(colorMap.get(count).contains(color), "Not expected color, failed with seed " + seed);
