@@ -1,15 +1,19 @@
 package com.szepe.peter.pex.rx;
 
 import com.google.common.collect.Comparators;
+import com.google.common.collect.Streams;
 import com.szepe.peter.pex.api.Pair;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.*;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class BufferedImageToTopKArray implements OperatorProvider<Pair<String, BufferedImage>, Pair<String, List<Pair<Color, Integer>>>, Exception> {
@@ -18,9 +22,20 @@ public class BufferedImageToTopKArray implements OperatorProvider<Pair<String, B
 
     private final int k;
 
-    public BufferedImageToTopKArray(int k) {
+    private final int [][][][] colorsArrays;
+    private final Map<Thread, Integer> threadToIdx = new ConcurrentHashMap<>();
+    private final AtomicInteger idxCounter = new AtomicInteger();
+
+    public BufferedImageToTopKArray(int k, int numberOfThreads) {
         this.k = k;
+        this.colorsArrays = new int[numberOfThreads][256][256][256];
     }
+
+    private int[][][] getColorsArray() {
+        Integer idx = threadToIdx.computeIfAbsent(Thread.currentThread(), i -> idxCounter.getAndIncrement());
+        return colorsArrays[idx];
+    }
+
 
     @Override
     public Operator<Pair<String, BufferedImage>, Pair<String, List<Pair<Color, Integer>>>, Exception> get() {
@@ -45,22 +60,24 @@ public class BufferedImageToTopKArray implements OperatorProvider<Pair<String, B
     }
 
     private Stream<ComparablePairByValue<Color, Integer>> getStream(int[][][] colors) {
-        List<ComparablePairByValue<Color, Integer>> list = new LinkedList();
-        for (int r = 0; r < 256; ++r) {
-            for (int g = 0; g < 256; ++g) {
-                for (int b = 0; b < 256; ++b) {
-                    int count = colors[r][g][b];
-                    if (count > 0) {
-                        list.add(new ComparablePairByValue<>(new Color(r, g, b), count));
-                    }
-                }
-            }
-        }
-        return list.stream();
+        return IntStream.range(0, 256 * 256 * 256)
+                .mapToObj(i -> getColorIntegerComparablePairByValue(colors, i))
+                .flatMap(o -> o.map(Stream::of).orElse(Stream.empty()));
+    }
+
+    private Optional<ComparablePairByValue<Color, Integer>> getColorIntegerComparablePairByValue(int[][][] colors, int i) {
+        int r = (i / (256 * 256)) % 256;
+        int g = (i / 256) % 256;
+        int b = i % 256;
+        int count = colors[r][g][b];
+        colors[r][g][b] = 0;
+        return count > 0
+                ? Optional.of(ComparablePairByValue.of(new Color(r, g, b), count))
+                : Optional.empty();
     }
 
     private int[][][] processImage(BufferedImage image) {
-        int[][][] colors = new int[256][256][256];
+        int[][][] colors = getColorsArray();
         for (int x = 0; x < image.getWidth(); ++x) {
             for (int y = 0; y < image.getHeight(); ++y) {
                 int rgb = image.getRGB(x, y);

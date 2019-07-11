@@ -15,17 +15,30 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class BufferedImageToTopKArrayTest {
 
     @Test
-    public void testTopK() {
+    public void testSingleImage() {
         long seed = System.nanoTime();
         Random r = new Random(seed);
         int numberOfColors = 100;
         int k = 3;
+        testImage(r, seed, numberOfColors, k);
+    }
 
+    @Test
+    public void testTwoImagesSingleImage() {
+        long seed = System.nanoTime();
+        Random r = new Random(seed);
+        int numberOfColors = 100;
+        int k = 3;
+        testImage(r, seed, numberOfColors, k);
+        testImage(r, seed, numberOfColors, k);
+    }
+
+    private void testImage(Random r, long seed, int numberOfColors, int k) {
         Pair<BufferedImage, Map<Integer, Set<Color>>> imgAndColorCounts = Utils.generateImage(r, numberOfColors);
         BufferedImage img = imgAndColorCounts.getFirst();
         Map<Integer, Set<Color>> colorMap = imgAndColorCounts.getSecond();
 
-        List<Pair<Color, Integer>> topKColor = new BufferedImageToTopKArray(k).getTopKColor(img);
+        List<Pair<Color, Integer>> topKColor = new BufferedImageToTopKArray(k, 1).getTopKColor(img);
         int prevCount = Integer.MAX_VALUE;
         for (Pair<Color, Integer> p : topKColor) {
             Color color = p.getFirst();

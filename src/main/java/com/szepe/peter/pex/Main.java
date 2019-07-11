@@ -2,7 +2,10 @@ package com.szepe.peter.pex;
 
 import com.szepe.peter.pex.api.Pair;
 import com.szepe.peter.pex.impl.FileReader;
-import com.szepe.peter.pex.rx.*;
+import com.szepe.peter.pex.rx.BufferedImageToTopKArray;
+import com.szepe.peter.pex.rx.ByteArrayToBufferedImage;
+import com.szepe.peter.pex.rx.DownloadImageAsByteArray;
+import com.szepe.peter.pex.rx.Operator;
 import com.szepe.peter.pex.spi.InputReader;
 import rx.Observable;
 import rx.Scheduler;
@@ -12,6 +15,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,26 +33,31 @@ public class Main {
     }
 
     void rxProcess() throws InputReader.InputReaderException {
-        String path = "./test_data/short.txt";
+        String path = "./test_data/input.txt";
 
         FileReader fileReader = new FileReader(path);
         int downloadThreads = 10;
-        int processThreads = 2;
+        int computationThreads = 2;
+
+        ExecutorService downloadExecutor = Executors.newFixedThreadPool(downloadThreads);
+        Scheduler downloadScheduler = Schedulers.from(downloadExecutor);
+        ExecutorService computationExecutor = Executors.newFixedThreadPool(computationThreads);
+        Scheduler computationScheduler = Schedulers.from(computationExecutor);
 
         Operator<String, Pair<String, byte[]>, IOException> downloadImageOperator = new DownloadImageAsByteArray().get();
         Operator<Pair<String, byte[]>, Pair<String, BufferedImage>, IOException> readToBufferedImageOperator = new ByteArrayToBufferedImage().get();
-        Operator<Pair<String, BufferedImage>, Pair<String, List<Pair<Color, Integer>>>, Exception> topKColorOperator = new BufferedImageToTopKArray(3).get();
+        Operator<Pair<String, BufferedImage>, Pair<String, List<Pair<Color, Integer>>>, Exception> topKColorOperator = new BufferedImageToTopKArray(3, computationThreads).get();
 
         Observable.from(fileReader.get()::iterator)
                 .flatMap(url -> Observable.just(url)
-                                .observeOn(Schedulers.io())
+                                .observeOn(downloadScheduler)
                                 .lift(downloadImageOperator),
                         downloadThreads)
                 .flatMap(byteArray -> Observable.just(byteArray)
-                                .observeOn(Schedulers.computation())
+                                .observeOn(computationScheduler)
                                 .lift(readToBufferedImageOperator)
                                 .lift(topKColorOperator),
-                        processThreads
+                        computationThreads
                 )
                 .toBlocking()
                 .subscribe(next -> System.out.println(next.getFirst() + ": " + next.getSecond()));
@@ -56,6 +65,9 @@ public class Main {
         logger.log(Level.INFO, downloadImageOperator.printStats());
         logger.log(Level.INFO, readToBufferedImageOperator.printStats());
         logger.log(Level.INFO, topKColorOperator.printStats());
+
+        downloadExecutor.shutdown();
+        computationExecutor.shutdown();
     }
 
 }
