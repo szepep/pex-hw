@@ -1,5 +1,7 @@
 package com.szepe.peter.pex.api;
 
+import com.google.common.base.Preconditions;
+
 import java.util.Objects;
 
 public class Pair<F, S> {
@@ -12,8 +14,8 @@ public class Pair<F, S> {
     private final S second;
 
     private Pair(F first, S second) {
-        this.first = first;
-        this.second = second;
+        this.first = Preconditions.checkNotNull(first);
+        this.second = Preconditions.checkNotNull(second);
     }
 
     public F getFirst() {

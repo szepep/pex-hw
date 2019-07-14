@@ -1,14 +1,15 @@
-package com.szepe.peter.pex.rx;
+package com.szepe.peter.pex.impl;
 
 import com.szepe.peter.pex.api.Pair;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Utils {
+
     static Pair<BufferedImage, Map<Integer, Set<Color>>> generateImage(Random random, int numberOfColors) {
         int max = 100;
         int width = 1 + random.nextInt(max);

@@ -15,20 +15,20 @@ public class Try<T, R, E extends Exception> {
         };
     }
 
-    private static <T, R, E extends Exception> Try<T, R, E> exception(T t, E e) {
-        return new Try<>(null, new ExceptionPair<>(t, e));
-    }
+    private final ExceptionAndValue<T, E> p;
 
     private static <T, R, E extends Exception> Try<T, R, E> result(R r) {
         return new Try<>(r, null);
     }
     private final R r;
 
-    private final ExceptionPair<T, E> p;
-
-    private Try(R r, ExceptionPair<T, E> p) {
+    private Try(R r, ExceptionAndValue<T, E> p) {
         this.r = r;
         this.p = p;
+    }
+
+    private static <T, R, E extends Exception> Try<T, R, E> exception(T t, E e) {
+        return new Try<>(null, new ExceptionAndValue<>(t, e));
     }
 
     public ExceptionConsumer<T, E> consumeResult(Consumer<R> consumer) {
@@ -38,7 +38,7 @@ public class Try<T, R, E extends Exception> {
         return this::consumeException;
     }
 
-    public void consumeException(Consumer<ExceptionPair<T, E>> exceptionConsumer) {
+    public void consumeException(Consumer<ExceptionAndValue<T, E>> exceptionConsumer) {
         if (p != null) {
             if (exceptionConsumer != null) {
                 exceptionConsumer.accept(p);
@@ -46,12 +46,21 @@ public class Try<T, R, E extends Exception> {
         }
     }
 
-    public static class ExceptionPair<T, E extends Exception> {
-        private final T value;
+    @FunctionalInterface
+    public interface ExceptionConsumer<T, E extends Exception> {
+        void consumeException(Consumer<ExceptionAndValue<T, E>> exceptionConsumer);
+    }
 
+    @FunctionalInterface
+    public interface CheckedFunction<T, R, E extends Exception> {
+        R apply(T t) throws E;
+    }
+
+    public static class ExceptionAndValue<T, E extends Exception> {
+        private final T value;
         private final E exception;
 
-        private ExceptionPair(T value, E exception) {
+        private ExceptionAndValue(T value, E exception) {
             this.value = value;
             this.exception = exception;
         }
@@ -63,15 +72,6 @@ public class Try<T, R, E extends Exception> {
             return exception;
         }
 
-    }
-    @FunctionalInterface
-    public interface CheckedFunction<T, R, E extends Exception> {
-        R apply(T t) throws E;
-    }
-
-    @FunctionalInterface
-    public interface ExceptionConsumer<T, E extends Exception> {
-        void consumeException(Consumer<Try.ExceptionPair<T, E>> exceptionConsumer);
     }
 
 }

@@ -1,24 +1,23 @@
-package com.szepe.peter.pex.rx;
+package com.szepe.peter.pex.impl;
 
 import com.google.common.collect.Comparators;
-import com.google.common.collect.Streams;
 import com.szepe.peter.pex.api.Pair;
+import com.szepe.peter.pex.spi.BufferedImageToTopK;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.*;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public class BufferedImageToTopKArray implements OperatorProvider<Pair<String, BufferedImage>, Pair<String, List<Pair<Integer, Integer>>>, Exception> {
+public class BImageToTopKArray implements BufferedImageToTopK {
 
-    private final static Logger logger = Logger.getLogger(BufferedImageToTopKArray.class.getName());
+    private final static Logger logger = Logger.getLogger(BImageToTopKArray.class.getName());
 
     private final int k;
 
@@ -26,7 +25,7 @@ public class BufferedImageToTopKArray implements OperatorProvider<Pair<String, B
     private final Map<Thread, Integer> threadToIdx = new ConcurrentHashMap<>();
     private final AtomicInteger idxCounter = new AtomicInteger();
 
-    public BufferedImageToTopKArray(int k, int numberOfThreads) {
+    public BImageToTopKArray(int k, int numberOfThreads) {
         this.k = k;
         this.colorsArrays = new int[numberOfThreads][256][256][256];
     }
@@ -36,19 +35,8 @@ public class BufferedImageToTopKArray implements OperatorProvider<Pair<String, B
         return colorsArrays[idx];
     }
 
-
     @Override
-    public Operator<Pair<String, BufferedImage>, Pair<String, List<Pair<Integer, Integer>>>, Exception> get() {
-        return Operator.of("Calculating top K", this::processImage);
-    }
-
-    private Pair<String, List<Pair<Integer, Integer>>> processImage(Pair<String, BufferedImage> p) {
-        logger.log(Level.FINE, "Processing image " + p.getFirst() + " on thread " + Thread.currentThread().getName());
-        List<Pair<Integer, Integer>> result = getTopKColor(p.getSecond());
-        return Pair.of(p.getFirst(), result);
-    }
-
-    List<Pair<Integer, Integer>> getTopKColor(BufferedImage t) {
+    public List<Pair<Integer, Integer>> getTopKColor(BufferedImage t) {
         int[][][] colors = processImage(t);
         List<ComparablePairByValue<Integer, Integer>> topK = getTopK(colors);
         return topK.stream().map(p -> Pair.of(p.getK(), p.getV())).collect(Collectors.toList());
@@ -96,6 +84,5 @@ public class BufferedImageToTopKArray implements OperatorProvider<Pair<String, B
                 ((g & 0xFF) << 8) |
                 ((b & 0xFF) << 0);
     }
-
 
 }

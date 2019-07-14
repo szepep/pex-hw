@@ -2,15 +2,9 @@ package com.szepe.peter.pex.rx;
 
 import com.google.common.io.ByteStreams;
 import com.szepe.peter.pex.api.Pair;
-import com.szepe.peter.pex.api.Try;
-import com.szepe.peter.pex.utils.Watch;
-import rx.Observable;
-import rx.Subscriber;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
