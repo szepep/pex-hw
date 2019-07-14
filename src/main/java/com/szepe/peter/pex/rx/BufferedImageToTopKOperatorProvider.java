@@ -3,12 +3,14 @@ package com.szepe.peter.pex.rx;
 import com.szepe.peter.pex.api.Pair;
 import com.szepe.peter.pex.spi.BufferedImageToTopK;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
-public class BufferedImageToTopKOperatorProvider implements OperatorProvider<Pair<String, BufferedImage>, Pair<String, List<Pair<Integer, Integer>>>, Exception> {
+public class BufferedImageToTopKOperatorProvider implements OperatorProvider<Pair<String, BufferedImage>, Pair<String, List<Color>>, Exception> {
 
     private final static Logger logger = Logger.getLogger(BufferedImageToTopKOperatorProvider.class.getName());
 
@@ -19,13 +21,15 @@ public class BufferedImageToTopKOperatorProvider implements OperatorProvider<Pai
     }
 
     @Override
-    public Operator<Pair<String, BufferedImage>, Pair<String, List<Pair<Integer, Integer>>>, Exception> get() {
+    public Operator<Pair<String, BufferedImage>, Pair<String, List<Color>>, Exception> get() {
         return Operator.of("Calculating top K", this::processImage);
     }
 
-    private Pair<String, List<Pair<Integer, Integer>>> processImage(Pair<String, BufferedImage> p) {
+    private Pair<String, List<Color>> processImage(Pair<String, BufferedImage> p) {
         logger.log(Level.FINE, "Processing image " + p.getFirst() + " on thread " + Thread.currentThread().getName());
-        List<Pair<Integer, Integer>> result = logic.getTopKColor(p.getSecond());
+        List<Color> result = logic.getTopKColor(p.getSecond()).stream()
+                .map(e -> e.getFirst())
+                .collect(Collectors.toList());
         return Pair.of(p.getFirst(), result);
     }
 

@@ -4,6 +4,7 @@ import com.google.common.collect.Comparators;
 import com.szepe.peter.pex.api.Pair;
 import com.szepe.peter.pex.spi.BufferedImageToTopK;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +23,7 @@ public class BImageToTopKMap implements BufferedImageToTopK {
     }
 
     @Override
-    public List<Pair<Integer, Integer>> getTopKColor(BufferedImage image) {
+    public List<Pair<Color, Integer>> getTopKColor(BufferedImage image) {
         Map<Integer, Integer> colors = new HashMap<>();
         for (int w = 0; w < image.getWidth(); ++w) {
             for (int h = 0; h < image.getHeight(); ++h) {
@@ -34,7 +35,7 @@ public class BImageToTopKMap implements BufferedImageToTopK {
         }
         return colors.entrySet().stream().map(e -> ComparablePairByValue.of(e.getKey(), e.getValue()))
                 .collect(Comparators.greatest(k, ComparablePairByValue::compareTo))
-                .stream().map(p -> Pair.of(p.getK(), p.getV())).collect(Collectors.toList());
+                .stream().map(p -> Pair.of(new Color(p.getK()), p.getV())).collect(Collectors.toList());
     }
 
 }

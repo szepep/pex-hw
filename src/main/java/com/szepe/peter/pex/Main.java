@@ -1,9 +1,10 @@
 package com.szepe.peter.pex;
 
-import com.szepe.peter.pex.impl.BImageToTopKArray;
+import com.szepe.peter.pex.impl.BImageToTopKMap;
 import com.szepe.peter.pex.impl.FileReader;
 import com.szepe.peter.pex.rx.BufferedImageToTopKOperatorProvider;
 import com.szepe.peter.pex.rx.ByteArrayToBufferedImage;
+import com.szepe.peter.pex.rx.ConvertToResultFormatOperatorProvider;
 import com.szepe.peter.pex.rx.DownloadImageAsByteArray;
 import com.szepe.peter.pex.spi.BufferedImageToTopK;
 import com.szepe.peter.pex.spi.InputReader;
@@ -39,7 +40,7 @@ class Main {
         ExecutorService computationExecutor = Executors.newFixedThreadPool(computationThreads);
         Scheduler computationScheduler = Schedulers.from(computationExecutor);
 
-        BufferedImageToTopK logic = new BImageToTopKArray(3, computationThreads);
+        BufferedImageToTopK logic = new BImageToTopKMap(3);
 
         Observable.from(fileReader.get()::iterator)
                 .flatMap(url -> Observable.just(url)
@@ -49,11 +50,11 @@ class Main {
                 .flatMap(byteArray -> Observable.just(byteArray)
                                 .observeOn(computationScheduler)
                                 .lift(new ByteArrayToBufferedImage().get())
-                                .lift(new BufferedImageToTopKOperatorProvider(logic).get()),
-                        computationThreads
-                )
+                                .lift(new BufferedImageToTopKOperatorProvider(logic).get())
+                                .lift(new ConvertToResultFormatOperatorProvider().get())
+                        , computationThreads)
                 .toBlocking()
-                .subscribe(next -> System.out.println(next.getFirst() + ": " + next.getSecond()));
+                .subscribe(System.out::println);
 
         downloadExecutor.shutdown();
         computationExecutor.shutdown();

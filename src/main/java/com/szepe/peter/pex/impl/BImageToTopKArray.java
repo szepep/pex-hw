@@ -4,6 +4,7 @@ import com.google.common.collect.Comparators;
 import com.szepe.peter.pex.api.Pair;
 import com.szepe.peter.pex.spi.BufferedImageToTopK;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.Map;
@@ -36,10 +37,10 @@ public class BImageToTopKArray implements BufferedImageToTopK {
     }
 
     @Override
-    public List<Pair<Integer, Integer>> getTopKColor(BufferedImage t) {
+    public List<Pair<Color, Integer>> getTopKColor(BufferedImage t) {
         int[][][] colors = processImage(t);
         List<ComparablePairByValue<Integer, Integer>> topK = getTopK(colors);
-        return topK.stream().map(p -> Pair.of(p.getK(), p.getV())).collect(Collectors.toList());
+        return topK.stream().map(p -> Pair.of(new Color(p.getK()), p.getV())).collect(Collectors.toList());
     }
 
     private List<ComparablePairByValue<Integer, Integer>> getTopK(int[][][] colors) {
