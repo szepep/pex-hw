@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Utils {
+class Utils {
 
     static Pair<BufferedImage, Map<Integer, Set<Color>>> generateImage(Random random, int numberOfColors) {
         int max = 100;
@@ -32,17 +32,13 @@ public class Utils {
 
         List<ComparablePairByValue<Color, Integer>> list = colorMap.entrySet().stream()
                 .map(e -> ComparablePairByValue.of(e.getKey(), e.getValue()))
+                .sorted(Collections.reverseOrder())
                 .collect(Collectors.toList());
 
-        Collections.sort(list, Collections.reverseOrder());
         Map<Integer, Set<Color>> map = new HashMap<>();
         for (ComparablePairByValue<Color, Integer> p : list) {
             Integer count = p.getV();
-            Set<Color> cs = map.get(count);
-            if (cs == null) {
-                cs = new HashSet<>();
-                map.put(count, cs);
-            }
+            Set<Color> cs = map.computeIfAbsent(count, k -> new HashSet<>());
             cs.add(p.getK());
         }
         return Pair.of(img, map);

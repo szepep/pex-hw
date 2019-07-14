@@ -10,6 +10,7 @@ public class Try<T, R, E extends Exception> {
             try {
                 return Try.result(function.apply(t));
             } catch (Exception ex) {
+                //noinspection unchecked
                 return Try.exception(t, (E) ex);
             }
         };
@@ -38,7 +39,7 @@ public class Try<T, R, E extends Exception> {
         return this::consumeException;
     }
 
-    public void consumeException(Consumer<ExceptionAndValue<T, E>> exceptionConsumer) {
+    private void consumeException(Consumer<ExceptionAndValue<T, E>> exceptionConsumer) {
         if (p != null) {
             if (exceptionConsumer != null) {
                 exceptionConsumer.accept(p);

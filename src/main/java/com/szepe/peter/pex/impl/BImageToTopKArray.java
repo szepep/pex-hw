@@ -79,10 +79,10 @@ public class BImageToTopKArray implements BufferedImageToTopK {
     }
 
     private int color(int r, int g, int b) {
-        return ((255 & 0xFF) << 24) |
+        return ((0xFF) << 24) |
                 ((r & 0xFF) << 16) |
                 ((g & 0xFF) << 8) |
-                ((b & 0xFF) << 0);
+                ((b & 0xFF));
     }
 
 }

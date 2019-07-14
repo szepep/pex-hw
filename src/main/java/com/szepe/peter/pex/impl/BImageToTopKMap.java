@@ -22,9 +22,8 @@ public class BImageToTopKMap implements BufferedImageToTopK {
     }
 
     @Override
-    public List<Pair<Integer, Integer>> getTopKColor(BufferedImage t) {
+    public List<Pair<Integer, Integer>> getTopKColor(BufferedImage image) {
         Map<Integer, Integer> colors = new HashMap<>();
-        BufferedImage image = t;
         for (int w = 0; w < image.getWidth(); ++w) {
             for (int h = 0; h < image.getHeight(); ++h) {
                 int color = image.getRGB(w, h);

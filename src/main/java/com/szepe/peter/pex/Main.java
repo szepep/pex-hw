@@ -15,7 +15,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Logger;
 
-public class Main {
+class Main {
 
     private final static Logger logger = Logger.getLogger(Main.class.getName());
 
@@ -27,8 +27,8 @@ public class Main {
         new Main().rxProcess();
     }
 
-    void rxProcess() throws InputReader.InputReaderException {
-        String path = "./test_data/short.txt";
+    private void rxProcess() throws InputReader.InputReaderException {
+        String path = "./test_data/input.txt";
 
         FileReader fileReader = new FileReader(path);
         int downloadThreads = 10;

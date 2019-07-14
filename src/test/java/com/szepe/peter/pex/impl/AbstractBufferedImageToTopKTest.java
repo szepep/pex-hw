@@ -65,6 +65,7 @@ abstract class AbstractBufferedImageToTopKTest<B extends BufferedImageToTopK> {
             Integer count = p.getSecond();
             assertTrue(prevCount >= count, "The result is not ordered, failed with seed " + seed);
             assertTrue(colorMap.get(count).contains(color), "Not expected color, failed with seed " + seed);
+            prevCount = count;
         }
     }
 

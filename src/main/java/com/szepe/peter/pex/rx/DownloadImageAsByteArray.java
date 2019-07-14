@@ -19,9 +19,9 @@ public class DownloadImageAsByteArray implements OperatorProvider<String, Pair<S
                 e -> logger.log(Level.WARNING, "Unable to download image" + e.getValue(), e.getException()));
     }
 
-    Pair<String, byte[]> downloadImage(String u) throws IOException {
+    private Pair<String, byte[]> downloadImage(String u) throws IOException {
         logger.log(Level.FINE, "Downloading image " + u + " on thread " + Thread.currentThread().getName());
         URL url = new URL(u);
-        return Pair.of(u,ByteStreams.toByteArray(url.openStream()));
+        return Pair.of(u, ByteStreams.toByteArray(url.openStream()));
     }
 }
