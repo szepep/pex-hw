@@ -7,4 +7,8 @@ public class OutputWriterToConsole implements OutputWriter {
     public void write(String s) {
         System.out.println(s);
     }
+
+    @Override
+    public void close() {
+    }
 }

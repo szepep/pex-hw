@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 
 import java.util.Objects;
 
-class ComparablePairByValue<K, V extends Comparable<V>> implements Comparable<ComparablePairByValue<K, V>> {
+public class ComparablePairByValue<K, V extends Comparable<V>> implements Comparable<ComparablePairByValue<K, V>> {
 
     public static <K, V extends Comparable<V>> ComparablePairByValue<K, V> of(K k, V v) {
         return new ComparablePairByValue<>(k, v);

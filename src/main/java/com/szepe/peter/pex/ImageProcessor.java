@@ -15,6 +15,7 @@ import rx.schedulers.Schedulers;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Service
@@ -50,7 +51,7 @@ class ImageProcessor {
         this.computationThreads = computationThreads;
     }
 
-    void process() throws InputReader.InputReaderException {
+    void process() throws InputReader.InputReaderException, OutputWriter.OutputWriterException {
         int processors = Runtime.getRuntime().availableProcessors();
         logger.info("Number of processors: " + processors);
         long maxMemory = Runtime.getRuntime().maxMemory();
@@ -73,10 +74,19 @@ class ImageProcessor {
                                 .lift(convertToResultFormatOperatorProvider.get())
                         , computationThreads)
                 .toBlocking()
-                .subscribe(outputWriter::write);
+                .subscribe(this::tryToWrite);
 
         downloadExecutor.shutdown();
         computationExecutor.shutdown();
+        outputWriter.close();
+    }
+
+    private void tryToWrite(String s) {
+        try {
+            outputWriter.write(s);
+        } catch (OutputWriter.OutputWriterException e) {
+            logger.log(Level.SEVERE, "unable to write output", e);
+        }
     }
 
 }

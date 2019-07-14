@@ -1,5 +1,7 @@
 package com.szepe.peter.pex.api;
 
+import com.szepe.peter.pex.spi.OutputWriter;
+
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -54,7 +56,7 @@ public class Try<T, R, E extends Exception> {
 
     @FunctionalInterface
     public interface CheckedFunction<T, R, E extends Exception> {
-        R apply(T t) throws E;
+        R apply(T t) throws E, OutputWriter.OutputWriterException;
     }
 
     public static class ExceptionAndValue<T, E extends Exception> {

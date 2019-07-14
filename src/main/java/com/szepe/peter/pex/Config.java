@@ -1,7 +1,7 @@
 package com.szepe.peter.pex;
 
 import com.szepe.peter.pex.impl.BImageToTopKMap;
-import com.szepe.peter.pex.impl.OutputWriterToConsole;
+import com.szepe.peter.pex.impl.OutputWriterToFile;
 import com.szepe.peter.pex.spi.BufferedImageToTopK;
 import com.szepe.peter.pex.spi.OutputWriter;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,13 +10,18 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
+import java.io.IOException;
+
 @Configuration
 @ComponentScan(basePackageClasses = Config.class)
 @PropertySource(value = "classpath:application.properties")
 public class Config {
 
     @Value("${top_k}")
-    int topK;
+    private int topK;
+
+    @Value("${output}")
+    private String output;
 
     @Bean
     public BufferedImageToTopK topKProcessor() {
@@ -24,7 +29,7 @@ public class Config {
     }
 
     @Bean
-    public OutputWriter outputWriter() {
-        return new OutputWriterToConsole();
+    public OutputWriter outputWriter() throws IOException {
+        return new OutputWriterToFile(output);
     }
 }
