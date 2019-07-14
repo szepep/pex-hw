@@ -1,6 +1,5 @@
 package com.szepe.peter.pex.impl;
 
-import com.szepe.peter.pex.rx.ByteArrayToBufferedImageOperatorProvider;
 import com.szepe.peter.pex.spi.OutputWriter;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -11,7 +10,7 @@ import java.util.logging.Logger;
 
 public class OutputWriterToFile implements OutputWriter {
 
-    private final static Logger logger = Logger.getLogger(ByteArrayToBufferedImageOperatorProvider.class.getName());
+    private final static Logger logger = Logger.getLogger(OutputWriterToFile.class.getName());
 
     private final FileWriter writer;
     private final String newLine = System.getProperty("line.separator");
