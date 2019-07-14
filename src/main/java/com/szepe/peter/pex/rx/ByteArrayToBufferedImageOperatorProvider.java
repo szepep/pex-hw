@@ -1,6 +1,7 @@
 package com.szepe.peter.pex.rx;
 
 import com.szepe.peter.pex.api.Pair;
+import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -9,9 +10,13 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ByteArrayToBufferedImage implements OperatorProvider<Pair<String, byte[]>, Pair<String, BufferedImage>, IOException> {
+@Service
+public class ByteArrayToBufferedImageOperatorProvider implements OperatorProvider<Pair<String, byte[]>, Pair<String, BufferedImage>, IOException> {
 
-    private final static Logger logger = Logger.getLogger(ByteArrayToBufferedImage.class.getName());
+    private final static Logger logger = Logger.getLogger(ByteArrayToBufferedImageOperatorProvider.class.getName());
+
+    ByteArrayToBufferedImageOperatorProvider() {
+    }
 
     @Override
     public Operator<Pair<String, byte[]>, Pair<String, BufferedImage>, IOException> get() {

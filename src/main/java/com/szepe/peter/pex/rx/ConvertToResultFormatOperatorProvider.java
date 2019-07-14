@@ -1,15 +1,20 @@
 package com.szepe.peter.pex.rx;
 
 import com.szepe.peter.pex.api.Pair;
+import org.springframework.stereotype.Service;
 
 import java.awt.*;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@Service
 public class ConvertToResultFormatOperatorProvider implements OperatorProvider<Pair<String, List<Color>>, String, Exception> {
 
     private final static Logger logger = Logger.getLogger(ConvertToResultFormatOperatorProvider.class.getName());
+
+    ConvertToResultFormatOperatorProvider() {
+    }
 
     @Override
     public Operator<Pair<String, List<Color>>, String, Exception> get() {

@@ -7,24 +7,9 @@ public interface InputReader {
 
     Stream<String> get() throws InputReaderException;
 
-    class InputReaderException extends Throwable {
-        public InputReaderException() {
-        }
-
-        public InputReaderException(String message) {
-            super(message);
-        }
-
+    class InputReaderException extends Exception {
         public InputReaderException(String message, Throwable cause) {
             super(message, cause);
-        }
-
-        public InputReaderException(Throwable cause) {
-            super(cause);
-        }
-
-        public InputReaderException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-            super(message, cause, enableSuppression, writableStackTrace);
         }
     }
 }

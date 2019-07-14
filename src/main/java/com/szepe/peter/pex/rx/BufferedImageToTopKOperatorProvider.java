@@ -2,6 +2,8 @@ package com.szepe.peter.pex.rx;
 
 import com.szepe.peter.pex.api.Pair;
 import com.szepe.peter.pex.spi.BufferedImageToTopK;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -10,13 +12,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+@Service
 public class BufferedImageToTopKOperatorProvider implements OperatorProvider<Pair<String, BufferedImage>, Pair<String, List<Color>>, Exception> {
 
     private final static Logger logger = Logger.getLogger(BufferedImageToTopKOperatorProvider.class.getName());
 
     private final BufferedImageToTopK logic;
 
-    public BufferedImageToTopKOperatorProvider(BufferedImageToTopK logic) {
+    @Autowired
+    BufferedImageToTopKOperatorProvider(BufferedImageToTopK logic) {
         this.logic = logic;
     }
 
